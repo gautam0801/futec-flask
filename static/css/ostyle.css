@@ -1,0 +1,126 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.upper-nav ul{
+  background: #F6F7F7;
+  display: flex;
+  align-items: start;
+  justify-content: left;
+  height: 40px;
+  width: 88.5vw;
+  overflow-x: hidden;
+  font-size: small;
+
+}
+
+.upper-nav ul li{
+  margin-top: 5px;
+  padding: 5px;
+  margin-left: 30PX;
+}
+div .main-container .upper-nav ul{
+  margin-top: -21px;
+  margin-left: -23px;
+}
+
+/* div .main-container{
+  display: flex;
+} */
+
+div .main-container .box{
+  
+  display:inline-flex;
+  align-items:center;
+  justify-content: space-around;
+  /* margin-left: 20px; */
+  /* margin-top: 40px; */
+  margin: 5px 2px 10px 70px;
+  margin-top: 3rem;
+  /* border: 1px solid black; */
+  box-shadow: 0.2px 0.2px 3px black;
+  padding: 4px;
+  background: var(--base-color);
+  height: 90px;
+  width: 15vw;
+  border-radius: 4px;
+}
+
+
+
+#xyz{
+  display: flex;
+  justify-content: space-evenly;
+}
+
+
+div .main-container .classa{
+  background: var(--base-color);
+  /* box-shadow: 1px 1px 1px 1px rgb(0, 0, 0); */
+  box-shadow: 0.2px 0.2px 3px black;
+  display: inline-flex;
+  align-items: center;
+  justify-content: space-around;
+  border-radius: 4px;
+  width: 22vw;
+  height: 350px;
+  margin-top: 32px;
+  
+  
+}
+
+div .main-container .classa:hover{
+  box-shadow: 0 10px 15px rgba(0,0,0,.3);
+  transform: scale(1.02);
+  background: linear-gradient(#e66465, #9198e5);
+  /* linear-gradient(217deg, rgba(255,0,0,.8), rgba(255,0,0,0) 70.71%),
+            linear-gradient(127deg, rgba(0,255,0,.8), rgba(0,255,0,0) 70.71%),
+            linear-gradient(336deg, rgba(0,0,255,.8), rgba(0,0,255,0) 70.71%); */
+  animation: color 12s ease-in-out infinite;
+  /* animation-name: color; */
+}
+@keyframes color{
+  0%{
+    background-position:0 50%;
+  }
+  50%{
+    background-position:100% 50%;
+  }
+  100%{
+    background-position:0 50%;
+  }
+  
+}
+
+#box-a{
+  font-size: 25px;
+  font-weight: 900;
+}
+#box-a a{
+  border-radius: 2px;
+  background: #E5F8ED;
+  /* color: #28C76F; */
+  padding: 5px;
+}
+#box-b{
+  font-size: 25px;
+  font-weight: 900;
+}
+#box-b a{
+  border-radius: 2px;
+  background: #E5F8ED;
+  /* color: #28C76F; */
+  padding: 5px;
+}
+#box-c{
+  font-size: 25px;
+  font-weight: 900;
+}
+#box-c a{
+  border-radius: 2px;
+  background: #E5F8ED;
+  /* color: #28C76F; */
+  padding: 5px;
+}
