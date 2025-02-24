@@ -10,13 +10,16 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
   <link rel="stylesheet" href="{{url_for('static', filename = 'css/msytle.css')}}">
+  <link rel="stylesheet" href="{{url_for('static', filename = 'css/pareto.css')}}">
   <script type="text/javascript" src="{{url_for('static', filename = 'js/darkmode.js')}}" defer></script>
-  <script type="text/javascript" src="{{url_for('static', filename = 'js/script.js')}}"></script>
-
+  <script type="text/javascript" src="{{url_for('static', filename = 'js/graph.js')}}"></script>
+  <script type="text/javascript" src="{{url_for('static', filename = 'js/script.js')}}" ></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 </head>
 
 <body>
+
   <label >
     <input type="checkbox">
   <div class="toggle">
@@ -86,13 +89,10 @@
       </div>
   </label>
 
- 
 
 
 
-
-
-<!-- ===================================main body=================================== -->
+<!-- ===============================main start========================================= -->
 <div class="top_menu">
   <div></div>
   <div>
@@ -113,30 +113,23 @@
 
 
 
-    <div class="main-m">
+
+    <div class="main-o">
       <div class="main-y">
-        <div class="main-z">
-          
-          
-          <div class="h"> 
-          
-              <div class="status-header">
-                  <div class="machine-name">F-24</div>
-                  <div class="status">Running Normal</div>
-              </div>
-              <div class="status-footer">
-                  <div class="tags">STPL ● RGWL</div>
-                  <div class="running-time">
-                      <span>Running Since</span>
-                      <span class="time">1 Hours Ago</span>
-                  </div>
-              </div>
-        
+        <div class="main-q">
+          <div class="new" style="color: #009999; font-weight: 900;
+     font-size: 30px; justify-content: space-between; align-items: center; padding: 10px;"> 
+     <div > <span>F-25</span> </div>
+              
+                <div>
+                  <span>Running Normal</span>
+                </div>
+            
           </div>
 
 
           <div>
-            <div class="e" style="justify-content: space-between; padding-left:20px;padding-right: 20px;">
+            <div class="new1" style="justify-content: space-between; padding-left:20px;padding-right: 20px;">
               
              <div>
               <div style="padding-bottom: 2rem;">
@@ -158,35 +151,13 @@
             
             
             </div>
-           
-           
-            <div class="a">
-               <div>
-                <span>Target <p style="color: #009999;">300T</p></span>
-               </div>
-               
-               <div>
-                <span>Projected <p style="color: #FF9F43;">166.2T</p></span>
-               </div>
-               
-               <div>
-                <span>Current <p style=" color:#00CFE8";>99.6T</p> </span>
-               </div>
-              
-               <div>
-                <span>Today <p style="color: #28C76F;">2.1T</p> </span>
-               </div>
-
-              </div>
-
 
           </div>
 
         </div>
-       
-       
-        <div class="d">
-  <ul >
+        <div class="new2">
+
+          <ul >
             <li><a href= "{{url_for('dashboard')}}">
                 <span class="machine-function"><i class="fas fa-inbox" aria-hidden="true"></i>
                 </span>
@@ -198,7 +169,7 @@
         
 
 
-            <li><a href="#" >
+            <li><a href="#">
                 <span >
                   <span class="machine-function"><i class="fas fa-inbox" aria-hidden="true"></i>
                   </span>
@@ -210,8 +181,7 @@
                   </span>
                   <span class="title">Downtime</span>
               </a></li>
-          
-              <li><a href="#">
+            <li><a href="#">
                 <span >
                   <span class="machine-function"><i class="fas fa-inbox" aria-hidden="true"></i>
                   </span>
@@ -219,97 +189,114 @@
               </a></li>
            
               <li><a href="{{url_for('pareto')}}">
+            
                   <span class="machine-function"><i class="fas fa-inbox" aria-hidden="true"></i>
                   </span>
-                  <span class="title">
-                    Pareto Chart
+                  <span class="title">Pareto Chart</span> </a></li>
+            <!-- <li><a href="#">
+                <span >
+                  <span class="machine-function"><i class="fas fa-inbox" aria-hidden="true"></i>
                   </span>
-              </a></li>
+                    <h6 style="background-color: red; width: 50px;"> Pareto Chart</h6>
+                  <span class="title"> -->
+                  
+                  <!-- <a href="{{url_for('pareto')}}">
+                    <canvas id="perto"></canvas>
+                     </a>
+                  </span>
+              </a></li> -->
           </ul>
         </div>
 
 
 
-        <div>
-
-        </div>
-        
+        <div class="calendar-container">
+          <div class="date-picker">
+              <div class="date-container">
+                  <label for="start-date">Starting Date:</label>
+                  <input type="date" id="start-date">
+      
+                  <span>to</span>
+      
+                  <label for="end-date">End Date:</label>
+                  <input type="date" id="end-date">
+              </div>
+          </div>
+      
+          <div class="generate-button">
+              <button>Generate</button>
+          </div>
+      
+          <div class="download-button">
+              <button onclick="downloadExcel()">
+                  <ion-icon name="download-outline"></ion-icon>
+              </button>
+          </div>
       </div>
-      <div class="m">
-        <div class="y" 
-        >
-          <!-- <div>
-            <figure>
-              <div class="pie-1"></div>
-            </figure>
-  
-            </div> -->
-  
-          <div>
-            <div class="donut-chart"  style="overflow: hidden;">
-              <div class="gauge">
-                <div class="gauge__body">
-                    <div class="gauge__fill"></div>
-                    <div class="gauge__cover"></div>
-                </div>
-            </div>
+
+
+      
+      </div>
+      
+      <div>
+        <div class="chartss"> 
+          <p> perto chart</p>
+
+          <canvas id="myChart">
+
+          </canvas>
+      <!-- <canvas class="gr"></canvas> -->
+
+
+
+      
+   
+</div>
+     </div>
+     <script>
+    const ctx = document.getElementById('myChart');
     
-            </div>
-          </div>
-  
-  
-        </div>
-        <div>
-  
-          <div class="s">
-            <h1>20.8%</h1>
-            <p>speed</p>
-          </div>
-          <div class="p">
-            <h1 >86.5%</h1><p> OEE</p></div>
-          <div class="s"> <h1>86.5% </h1><p>Availability</p></div>
-          <div class="p"><h1>86.5%</h1><p> Perf</p> </div>
-        </div>
-        <div>
-          <div class="r"><h1> 101 </h1><p>order</p> </div>
-          <div class="n"> <h1>2</h1> 
-            <p>Grade</p></div>
-          <div class="r"><h1>3.5 </h1><p>Inlet</p></div>
-          <div class="n"><h1>0.9 </h1><p>Outlet</p></div>
-        </div>
-      </div>
-  
-  
-    </div>
+    new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Die Changed planned','Power Fluctuation','Mechanical'],
+        datasets: [{
+          label: 'Downtime',
+          backgroundColor: '#0386CE',
+          data: [3,15,15],
+          borderWidth: 1
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+            display: true,
+            text: 'Downtime (Minutes)'
+            }
+            
+          }
+        }
+      }
+    });
+    function downloadExcel() {
+            window.location.href = "/download_excel";
+        }
+    </script>
 
-    </div>
-
-  
-  <script>
-    const gaugeElement = document.querySelector(".gauge");
-
-    function setGaugeValue(gauge, value) {
-       if (value < 0 || value > 1) {
-           return;
-              }
-
-        gauge.querySelector(".gauge__fill").style.transform = `rotate(${
-                     value / 2
-                           }turn)`;
-        gauge.querySelector(".gauge__cover").textContent = `${Math.round(
-        value * 100
-         )}%`;
-                }
-                const randomValue = Math.random();
-
-// Set the gauge value using the random number
-setGaugeValue(gaugeElement, randomValue);
-        // setGaugeValue(gaugeElement,0.7 );
+      
+<!-- ==================scripts============ -->
+ 
 
 
-</script>
 
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.min.js" integrity="sha512-L0Shl7nXXzIlBSUUPpxrokqq4ojqgZFQczTYlGjzONGTDAcLremjwaWv5A+EDLnxhQzY5xUZPWLOLqYRkY0Cbw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
   <script src="https://kit.fontawesome.com/ea3961044f.js" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </body>
 
 </html>

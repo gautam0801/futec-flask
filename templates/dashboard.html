@@ -1,208 +1,351 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>FUTECH IOT DASHBOARD </title>
-  <link rel="stylesheet" href= "{{url_for('static',filename= 'css/style.css')}}">
+  <link rel="stylesheet" href="{{url_for('static',filename= 'css/style.css')}}">
   <link href="favicon.ico" rel="icon" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
 
   <script type="text/javascript" src="{{url_for('static',filename='js/darkmode.js')}}" defer></script>
-  <script type="text/javascript" src="graph.js"></script>
-  
+  <script type="text/javascript" src="{{url_for('static',filename='js/script.js')}}" defer></script>
+
+
 
   <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
-    <script type="text/javascript">
-      google.charts.load('current', {'packages':['bar']});
-      google.charts.setOnLoadCallback(drawChart);
+  <script type="text/javascript">
+    google.charts.load('current', { 'packages': ['bar'] });
+    google.charts.setOnLoadCallback(drawChart);
 
-      function drawChart() {
-        var data = google.visualization.arrayToDataTable([
-          ['', 'OEF', 'Availability', 'Performance'],
-          ['F - 25', 0, 0, 0],
-          ['F - 24', 85, 85, 65],
-          ['F - 26', 55, 90, 60],
-          ['F - 27', 33, 90, 35]
-        ]);
+    function drawChart() {
+      var data = google.visualization.arrayToDataTable([
+        ['LAST MONTH DATA', 'OEF', 'Availability', 'Performance'],
+        ['F - 25', 0, 0, 0],
+        ['F - 24', 85, 85, 65],
+        ['F - 26', 55, 90, 60],
+        ['F - 27', 33, 90, 35]
+      ]);
 
-        var options = {
-          chart: {
-            title: 'Efficiency'
-            // subtitle: 'Sales, Expenses, and Profit: 2014-2017',
+      var bgColor = getComputedStyle(document.documentElement).getPropertyValue('background-color').trim();
+
+      var options = {
+        chart: {},
+        backgroundColor: bgColor, // Apply dynamic background color
+        bars: 'vertical', // Ensure column chart format
+        bar: { groupWidth: "50%" }, // Adjust bar width
+        legend: { position: 'top' }, // Move legend to the top
+        annotations: {
+          alwaysOutside: false, // Keeps labels inside bars
+          textStyle: {
+            fontSize: 12,
+            color: 'white', // Ensure readability inside the bars
+            auraColor: 'none'
           }
-        };
+        }
+      };
 
-        var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+      var chart = new google.charts.Bar(document.getElementById('columnchart_material'));
+      chart.draw(data, google.charts.Bar.convertOptions(options));
+    }
 
-        chart.draw(data, google.charts.Bar.convertOptions(options));
-      }
-    </script>
+
+
+  </script>
 </head>
-<body >
- 
-<div class="wrapper">
-    <div class="top_navbar"> 
-        <div class="hamburger">
-          <!-- <img src="logo.png" alt="" srcset="" style="width: 250px; margin-top: 0px;"> -->
-            <!-- <div></div>
-            <div></div>
-            <div></div> -->
-        </div>
-        <div class="top_menu">
-            <div class="logo">
-                <!-- <img src="logo.png" alt="" srcset="" style="width: 100px; margin-top: 0px;"> -->
-            </div >
-            
-            <ul>
-              <button id="theme-switch">
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="undefined"><path d="M480-120q-150 0-255-105T120-480q0-150 105-255t255-105q14 0 27.5 1t26.5 3q-41 29-65.5 75.5T444-660q0 90 63 153t153 63q55 0 101-24.5t75-65.5q2 13 3 26.5t1 27.5q0 150-105 255T480-120Zm0-80q88 0 158-48.5T740-375q-20 5-40 8t-40 3q-123 0-209.5-86.5T364-660q0-20 3-40t8-40q-78 32-126.5 102T200-480q0 116 82 198t198 82Zm-10-270Z"/></svg>
-                <svg xmlns="http://www.w3.org/2000/svg" height="24px" viewBox="0 -960 960 960" width="24px" fill="undefined"><path d="M480-280q-83 0-141.5-58.5T280-480q0-83 58.5-141.5T480-680q83 0 141.5 58.5T680-480q0 83-58.5 141.5T480-280ZM200-440H40v-80h160v80Zm720 0H760v-80h160v80ZM440-760v-160h80v160h-80Zm0 720v-160h80v160h-80ZM256-650l-101-97 57-59 96 100-52 56Zm492 496-97-101 53-55 101 97-57 59Zm-98-550 97-101 59 57-100 96-56-52ZM154-212l101-97 55 53-97 101-59-57Z"/></svg>
-              </button>
-                
-                
-                <li><a href="#"><i class="fa-solid fa-search"></i></a></li>
-                <li><a href="#"><i class="fa-solid fa-bell"></i></a></li>
-                <li><a href="#"><i class="fa-solid fa-user"></i></a></li>
-            </ul>
-        </div>
-    </div>
+
+<body>
+<div class="fullypage">
+
+<!-- ================= Aside Navbar========================== -->
+<label >
+  <input type="checkbox">
+<div class="toggle">
+<span class="top_line common"></span>
+<span class="middle_line common"></span>
+<span class="bottom_line common"></span>
+
+</div>
+
+
+
     <div class="sidebar">
-      <div>    <img src="{{ url_for('static', filename='css/logo.png')}}" style="width: 200px; margin-top: 0px;"></div>
+
+      <div class="sid-nav">
+        <div> <img src="{{ url_for('static', filename='css/logo.png')}}" style="width: 200px;">
+        </div>
+        <div>
+          <!-- <button class="hamburger">☰</button> -->
+        </div>
+
+      </div>
       <ul>
-        <li><a href="dashboard.html" class="active">
-          <span class="icon"><i class="fas fa-house" aria-hidden="true"></i>
-          </span>
-          <span class="title">Dashboard</span>
-        </a></li>
+        <li><a href="{{url_for('index')}}" class="active">
+          <div style="display:flex;align-items: center;">
+            <span class="icon"><i class="fas fa-house" aria-hidden="true"></i>
+            </span>
+            <span class="title">Dashboard</span>
+            <span style= "background:#0487C7;height: 100%; width: 8px; position: absolute;right: 0; border-top-left-radius:var(--border-radius);border-bottom-left-radius: var(--border-radius) ;"></span></div>
+          </a>    </li>
 
         <li>
           <span class="icon"></span>
           <h5>MACHINES</h5>
         </li>
 
-        <li><a href="info.html">
-          <span class="icon">
-            <span class="icon"><i class="fas fa-inbox" aria-hidden="true"></i>
-          </span>
-          <span class="title">Info</span>
-        </a></li>
-        <li><a href="overview.html" >
-          <span class="icon">
-            <span class="icon"><i class="fas fa-inbox" aria-hidden="true"></i>
-          </span>
-          <span class="title"> Overview</span>
-        </a></li>
-        <li><a href="reports.html">
-          <span class="icon">
-            <span class="icon"><i class="fas fa-inbox" aria-hidden="true"></i>
-          </span>
-          <span class="title">Reports</span>
-        </a></li>
-        
+        <li><a href="{{url_for('info')}}">
+            <span class="icon">
+              <span class="icon"><i class="fas fa-inbox" aria-hidden="true"></i>
+              </span>
+              <span class="title">Info</span>
+              
+          </a></li>
+        <li><a href="{{url_for('over')}}
+        ">
+            <span class="icon">
+              <span class="icon"><i class="fas fa-inbox" aria-hidden="true"></i>
+              </span>
+              <span class="title"> Overview</span>
+          </a></li>
+        <li><a href="{{url_for('register')}}">
+            <span class="icon">
+              <span class="icon"><i class="fas fa-inbox" aria-hidden="true"></i>
+              </span>
+              <span class="title">Reports</span>
+          </a></li>
+
         <li>
           <span class="icon">
-          <h5>ADMINSTRATION</h5>
-      </li>
+            <h5>ADMINSTRATION</h5>
+        </li>
 
-        <li><a href="#">
-          <span class="icon">
-            <span class="icon"><i class="fas fa-globe" aria-hidden="true"></i>
-          </span>
-          <span class="title">Support</span>
-        </a></li>
+        <li><a href="{{url_for('support')}}">
+            <span class="icon">
+              <span class="icon"><i class="fas fa-globe" aria-hidden="true"></i>
+              </span>
+              <span class="title">Support</span>
+          </a></li>
       </ul>
     </div>
+</label>
+
+    <!-- ==================main ====================== -->
+
+
     <div class="main-container">
+
+
+
+
+
+
       <div class="inner-item">
-        
-        <div id="box1" class="side_by_side">
-           Total_Production 
-           
-           228.6T</div>
 
-           
-             
+    <div class="top_menu">
+       <div></div>
+       <div>
+        <ul>
+          <li>
+            <button id="theme-switch" onclick="toggleTheme()">
+              <i id="light-icon" class="fa-solid fa-sun"></i>
+              <i id="dark-icon" class="fa-solid fa-moon" style="display: none;"></i>
+            </button>
+          </li>
 
+          <li><a href="#"><i class="fa-solid fa-search"></i></a></li>
+          <li><a href="#"><i class="fa-solid fa-bell"></i></a></li>
+          <li><a href="#"><i class="fa-solid fa-user"></i></a></li>
+        </ul>
+      </div>
+    </div>
 
+        <div class="cont">
 
-        <div id="box2" class="side_by_side">Total_Consumption  225.7T</div>
+          <div id="box1" class="side_by_side">
+            <div class="point1">
+              <div class="point" style="background:#28C76F;"></div>
+              <span style="color: #6E6B7B;font-weight: 500;">Total Production</span>
+            </div>
+            <span style="color: #28C76F;font-weight: 800; font-size: 2rem; ">228.6T</span>
+          </div>
 
-         <div>
+          <div id="box2" class="side_by_side">
+            <div class="point1">
+              <div class="point" style="background: orange;"></div>
+              <span style="color: #6E6B7B;font-weight: 500;">Total Consumption</span>
+            </div>
+            <span style="color: orange; font-weight: 800; font-size: 2rem;">225.7T</span>
+
+          </div>
+        </div>
+
         <div class="main-center">
 
           <div class="center-container">
 
-        <div id="box3" class="function" style="color:green;font-weight: 900; font-size: 25px;">
-        <!-- <div class="skill">
+            <div id="box3" class="function" style="color:#009999;font-weight: 900; font-size: 25px;">
+              <!-- <div class="skill">
         <li> -->
-          
-           4 <br>Total
-         <!-- <span class="bar"></span><span class="html"></span><span></span></li> -->
-        <!-- </div>  -->
+              <div>
+                <H3 style="display: flex;align-items: center;justify-content: center;">4</H3>
 
-          
-           </div>
-        <div id="box3" class="function" > <a href=" {{url_for('static', filename = 'templates/overview.html')}}" style="color:green;font-weight: 900; font-size: 25px;"> &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;0 <br> Producing</a></div>
-        <div id="box3" class="function"  style="color:orangered;font-weight: 900; font-size: 25px;" >&nbsp;&nbsp;&nbsp;0 <br> Fault</div>
-        <div id="box3" class="function"  style="color:red;font-weight: 900; font-size: 25px;">&nbsp;&nbsp;&nbsp;&nbsp;0  <br> Stopped</div>
-        <div id="box3" class="function"  style="color:#00CFE8;font-weight: 900; font-size: 25px;">&nbsp;&nbsp;0 <br> Idle</div>
-        <div id="box3" class="function"  style="color:#6E6B7B;font-weight: 900; font-size: 25px;">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;4 <br> Disconnected </div>
-   </div>
-        <div id="box4"><a href="#"></a>Shift_A  69.7T</div>
-    <div id="box4"><a href="#"></a>Shift_B 74T</div>
-    <div id="box4"><a href="#"></a>Shift_C 75.4T </div>
-    <div id="box5"><a href="#"></a>Faults_Today 0</div>
-</div>
+                <p style="display: flex;align-items: center;justify-content: center;">Total
+                </p>
+                <span class="bar"><span class="t"></span></span>
 
-<div class="un">
-      <div id="box6">
-        <div>
-      
-          <div class="under">
-            <div>
-         <div>
-            
-              <h1>F24</h1>
-          </div> 
+              </div>
+              <!-- <span class="bar"></span><span class="html"></span><span></span></li> -->
+              <!-- </div>  -->
+
+
+            </div>
+            <div id="box3" class="function"> <a href="{{url_for('over')}}"
+                style="color:green;font-weight: 900; font-size: 25px;">
+
+
+
+
+                <div>
+                  <H3 style="display: flex;align-items: center;justify-content: center;">4</H3>
+                  <p style="display: flex;align-items: center;justify-content: center;">Production
+                  </p>
+                  <span class="bar"><span class="v"></span></span>
+                </div>
+
+
+              </a></div>
+            <div id="box3" class="function" style="color:orangered;font-weight: 900; font-size: 25px;">
+
+
+              <div>
+                <H3 style="display: flex;align-items: center;justify-content: center;">0</H3>
+                <p style="display: flex;align-items: center;justify-content: center;">Fault
+                </p>
+                <span class="bar"><span class="f"></span></span>
+              </div>
+            </div>
+            <div id="box3" class="function" style="color:red;font-weight: 900; font-size: 25px;">
+
+              <div>
+                <H3 style="display: flex;align-items: center;justify-content: center;">0</H3>
+                <p style="display: flex;align-items: center;justify-content: center;">Stopped
+                </p>
+                <span class="bar"><span class="w"></span></span>
+              </div>
+            </div>
+            <div id="box3" class="function" style="color:#00CFE8;font-weight: 900; font-size: 25px;">
+              <div>
+                <H3 style="display: flex;align-items: center;justify-content: center;">0</H3>
+                <p style="display: flex;align-items: center;justify-content: center;">Idle
+                </p>
+                <span class="bar"><span class="i"></span></span>
+              </div>
+            </div>
+            <div id="box3" class="function" style="color:#6E6B7B;font-weight: 900; font-size: 25px;">
+
+              <div>
+                <H3 style="display: flex;align-items: center;justify-content: center;">0</H3>
+                <p style="display: flex;align-items: center;justify-content: center;">Disconnected
+                </p>
+                <span class="bar"><span class="x"></span></span>
+              </div>
+            </div>
+          </div>
           <div>
-          <h4>Top-Performance</h4>
+            <div id="straight">
+              <div id="box4">
+
+                <div style="display: flex; align-items: center;gap: 9px;"> <span
+                    style="background: white; height: 25px;width: 6px;"></span> <span>Shift A</span></div>
+
+                <span>69.7T</span>
+
+
+              </div>
+              <div id="box4">
+
+                <div style="display: flex; align-items: center;gap: 9px;"> <span
+                    style="background: white; height: 25px;width: 6px;"></span> <span>Shift B</span></div>
+                <span>69.7T</span>
+              </div>
+
+              <div id="box4">
+                <div style="display: flex; align-items: center;gap: 9px;"> <span
+                    style="background: white; height: 25px;width: 6px;"></span> <span>Shift C</span></div>
+                <span>69.7T</span>
+              </div>
+
+              <div id="box4" style="background-color: orange;">
+                <div style="display: flex; align-items: center;gap: 9px;"> <span
+                    style="background: white; height: 25px;width: 6px;"></span> <span>Shift D </span></div>
+                <span>69.7T</span>
+              </div>
+            </div>
           </div>
-          
-           <div><span> Downtime 63hrs</span></div>
-           <div><span> Production 172.2T</span></div>
-           <div><span> Effciency 63hrs</span></div>
-           <div><span> Availability 63hrs</span></div>
-           <div><span> Performance 63hrs</span></div>
-          </div>  
+
+          <div class="un">
+            <div id="box6">
+              <div class="container">
+                <div class="heading">
+                  <h1>F24</h1>
+                </div>
+                <div class="sub-heading">Top-Performer</div>
+                <div class="details">
+                  <div class="detail"><span>Downtime:</span> <span class="last">63 hrs</span></div>
+                  <div class="detail"><span>Production:</span> <span class="last">172.2T</span></div>
+                  <div class="detail"><span>Efficiency:</span> <span class="last">63 hrs</span></div>
+                  <div class="detail"><span>Availability:</span> <span class="last">63 hrs</span></div>
+                  <div class="detail"><span>Performance:</span> <span class="last">63 hrs</span></div>
+                  <div class="detail"><span></span>
+                    <span
+                      style="color: #009999; background: #a8f3f3 ; padding: 4px; border-radius: var(--border-radius);font-weight: 500;">Last
+                      Month Data</span></div>
+                </div>
+              </div>
+            </div>
+
+
+            <div id="box7">
+
+              <div class="go">
+                <div style="display: flex;justify-content: space-around;border-bottom:1px solid rgb(220, 217, 217) ;padding-top: 1rem;padding-bottom: 1rem;">
+                  <span style="font-weight: 600;font-size: 19px;">Production</span>
+                  <span></span>
+                  <span></span>
+                  <span style="font-weight: 700;font-size: 19px;">343.10T</span>
+                </div>
+
+
+
+                <div class="pie"></div>
+
+
+
+              </div>
+              <div class="ready">
+
+                <span style="color:#FF9F43;border-bottom: 1px solid rgb(220,217,217);font-weight:600;font-size: 19px;padding-left: 2rem;
+                padding-bottom: 1rem;padding-top: 1rem;">Efficiency</span>
+                
+                <div id="columnchart_material">
+                </div>
+              </div>
+
+            </div>
+
+
+          </div>
         </div>
-    
-          </div>
-
-
-
-
-      </div>
-        <div id="box7">
-          <p>  Production</p>
-          <figure class="charts">
-            <div class="pie"></div>
-          </figure>
-          <div id="columnchart_material" style="width: 600px; height: 330px;margin-left: 130px;" >
-
-          </div>
-         
       </div>
     </div>
-
-  
-      </div>
-    </div> 
-
-</div>
- <script src="https://kit.fontawesome.com/ea3961044f.js" crossorigin="anonymous"></script>
- <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script> -->
+  </div>
+  <script src="https://kit.fontawesome.com/ea3961044f.js"></script>
+  <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+  <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+  <!-- <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7/dist/chart.umd.min.js"></script> -->
 
 </body>
+
 </html>
