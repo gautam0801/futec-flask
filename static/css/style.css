@@ -701,7 +701,7 @@ width: auto;
 
 .sidebar {
 
-  position: absolute;
+  position: fixed;
   width: 200px;
   transform: translateX(-200px);
   background: white;
@@ -789,13 +789,8 @@ flex-wrap: wrap;
  right: 0;
  z-index: 10;
  width: 100px;
-
  background-color: greenyellow;
 }
-
-
-
-
 
 
 }

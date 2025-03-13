@@ -8,10 +8,10 @@
   <link href="favicon.ico" rel="icon" type="image/x-icon">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin=""> 
-  <link rel="stylesheet" href="{{url_for('static', filename='css/style.css')}}">
-  <link rel="stylesheet" href="{{ url_for('static', filename='css/ostyle.css')}}">
-  <script type="text/javascript" src= "{{url_for('static', filename='js/darkmode.js')}}" defer></script>
-  <script type="text/javascript" src= "{{url_for('static', filename='js/script.js')}}"></script>
+  <link rel="stylesheet" href="{{url_for('static', path='css/style.css')}}">
+  <link rel="stylesheet" href="{{ url_for('static', path='css/ostyle.css')}}">
+  <script type="text/javascript" src= "{{url_for('static', path='js/darkmode.js')}}" defer></script>
+  <script type="text/javascript" src= "{{url_for('static', path='js/script.js')}}"></script>
 
 </head>
 <body >
@@ -30,7 +30,7 @@
       <div class="sidebar">
   
         <div class="sid-nav">
-          <div> <img src="{{ url_for('static', filename='css/logo.png')}}" style="width: 200px;">
+          <div> <img src="{{ url_for('static', path='css/logo.png')}}" style="width: 200px;">
           </div>
           <div>
             <!-- <button class="hamburger">☰</button> -->
@@ -170,7 +170,7 @@
                     <span>F24</span>
                     <span> Running Normal</span>
                   </h4>
-              </a>
+            
                <!-- YO Section (Speed & Production) -->
               <div class="soup">
                 <div class="yo" >
@@ -201,6 +201,7 @@
                     <span class="y0">Perf</span>
                 </div>
             </div>
+          </a>
           </div>
       
          
